@@ -9,7 +9,7 @@ def print_options():
 def list_accounts(user):
     print('Your accounts:')
     for i in range(3, len(user)):
-        print(f'{i - 2}. {user[i][0]} - Balance: {user[i][1]} RUB')
+        print(f'{i - 2}. {user[i][0]} - Balance: {user[i][1]} RUB') 
     
 def count_accounts(user):
     return len(user) - 3
@@ -23,6 +23,7 @@ def transfer_money(user):
         src_acc, target_acc = request_accounts()
         src_acc, target_acc = check_accounts(src_acc, target_acc, acc_number)
         money_amount = request_input('Enter the amount to transfer: ')
+        check_money(money_amount,user)
 
 def request_accounts():
         return request_input('Select the source account: '), request_input('Select the target account: ')
@@ -37,9 +38,11 @@ def check_accounts(src, tgt, number):
         src, tgt = request_accounts()
     return src, tgt
 
-def check_amount():
-    pass
-
+def check_money(money_amount, user=[]):
+    if int(user[count_accounts(user)][1]) <= 0 or int(user[count_accounts(user)][1]) < money_amount:
+        print('Not enough money in your account to transfer!')        
+    return money_amount, user 
+    
 def request_input(msg):
     return int(input(msg))
 
@@ -107,7 +110,3 @@ def auth():
     else: print('Incorrect username/password!')
 
 auth()
-
-
-
-
